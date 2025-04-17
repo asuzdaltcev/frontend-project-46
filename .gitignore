@@ -1,2 +1,22 @@
+# Зависимости
 node_modules/
+package-lock.json
+
+# Системные файлы
 .DS_Store
+.vscode/
+
+# Логи
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Директории сборки
+dist/
+build/
+coverage/
+
+# Временные файлы
+.tmp/
+.temp/
