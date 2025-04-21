@@ -39,13 +39,14 @@ jobs:
         run: npm run test:coverage
       
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@master
+        uses: SonarSource/sonarqube-scan-action@v1
         with:
           args: >
             -Dsonar.projectKey=asuzdaltcev_frontend-project-46
             -Dsonar.organization=asuzdaltcev
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.java.home=/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.9-9/x64
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }} 
