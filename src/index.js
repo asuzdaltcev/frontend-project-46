@@ -48,7 +48,6 @@ const formatDiff = (diff) => {
 export const genDiff = (filepath1, filepath2) => {
   const data1 = parseFile(filepath1);
   const data2 = parseFile(filepath2);
-  
   const diff = compareObjects(data1, data2);
   return formatDiff(diff);
 };

@@ -15,7 +15,7 @@ program
   .version(pkg.version)
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format [type]', 'output format')
-  .action((filepath1, filepath2, options) => {
+  .action((filepath1, filepath2) => {
     console.log(genDiff(filepath1, filepath2));
   })
   .parse(process.argv);
