@@ -1,13 +1,9 @@
 # Вычислитель отличий
 
 [![Actions Status](https://github.com/asuzdaltcev/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/asuzdaltcev/frontend-project-46/actions)
-[![Node.js CI](https://github.com/asuzdaltcev/frontend-project-46/actions/workflows/nodejs.yml/badge.svg)](https://github.com/asuzdaltcev/frontend-project-46/actions/workflows/nodejs.yml)
-[![SonarQube Analysis](https://github.com/asuzdaltcev/frontend-project-46/actions/workflows/sonar.yml/badge.svg)](https://github.com/asuzdaltcev/frontend-project-46/actions/workflows/sonar.yml)
-[![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=asuzdaltcev_frontend-project-46&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=asuzdaltcev_frontend-project-46)
-[![Test Coverage](https://sonarcloud.io/api/project_badges/measure?project=asuzdaltcev_frontend-project-46&metric=coverage)](https://sonarcloud.io/summary/new_code?id=asuzdaltcev_frontend-project-46)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=asuzdaltcev_frontend-project-46&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=asuzdaltcev_frontend-project-46)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=asuzdaltcev_frontend-project-46&metric=bugs)](https://sonarcloud.io/summary/new_code?id=asuzdaltcev_frontend-project-46)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=asuzdaltcev_frontend-project-46&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=asuzdaltcev_frontend-project-46)
+[![Node CI](https://github.com/asuzdaltcev/frontend-project-46/actions/workflows/tests.yml/badge.svg)](https://github.com/asuzdaltcev/frontend-project-46/actions/workflows/tests.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/YOUR_REPO_ID/maintainability)](https://codeclimate.com/github/asuzdaltcev/frontend-project-46/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/YOUR_REPO_ID/test_coverage)](https://codeclimate.com/github/asuzdaltcev/frontend-project-46/test_coverage)
 
 ## Описание
 
