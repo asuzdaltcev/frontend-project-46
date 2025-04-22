@@ -3,7 +3,11 @@ import { parseFile } from './parsers.js';
 const compareObjects = (data1, data2) => {
   const keys1 = Object.keys(data1);
   const keys2 = Object.keys(data2);
-  const allKeys = [...new Set([...keys1, ...keys2])].sort();
+  const allKeys = [...new Set([...keys1, ...keys2])].sort((a, b) => {
+    if (a < b) return -1;
+    if (a > b) return 1;
+    return 0;
+  });
 
   const diff = allKeys.map((key) => {
     if (!Object.hasOwn(data1, key)) {
