@@ -44,6 +44,20 @@ describe('genDiff', () => {
 }`);
   });
 
+  test('should generate diff for YAML files', () => {
+    const filepath1 = getFixturePath('before.yml');
+    const filepath2 = getFixturePath('after.yml');
+    const diff = genDiff(filepath1, filepath2);
+    expect(diff).toBe(`{
+  - follow: false
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - timeout: 50
+  + timeout: 20
+  + verbose: true
+}`);
+  });
+
   test('should throw error for non-existent file', () => {
     expect(() => {
       genDiff('non-existent1.json', 'non-existent2.json');

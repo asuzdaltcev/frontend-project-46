@@ -22,6 +22,8 @@ make install
 
 ```bash
 gendiff filepath1.json filepath2.json
+# или
+gendiff filepath1.yml filepath2.yml
 ```
 
 ## Разработка
@@ -42,6 +44,8 @@ make test-coverage
 
 ## Пример работы
 
+### Сравнение JSON файлов
+
 ```bash
 $ gendiff __fixtures__/before.json __fixtures__/after.json
 {
@@ -53,3 +57,19 @@ $ gendiff __fixtures__/before.json __fixtures__/after.json
   + verbose: true
 }
 ```
+
+### Сравнение YAML файлов
+
+```bash
+$ gendiff __fixtures__/before.yml __fixtures__/after.yml
+{
+  - follow: false
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - timeout: 50
+  + timeout: 20
+  + verbose: true
+}
+```
+
+[![asciicast](https://asciinema.org/a/GPUx8u8X5CkcZev2MCddWJPW3.svg)](https://asciinema.org/a/GPUx8u8X5CkcZev2MCddWJPW3)
