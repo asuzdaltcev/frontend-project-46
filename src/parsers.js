@@ -9,6 +9,6 @@ export const parseFile = (filepath) => {
   if (extension === '.json') {
     return JSON.parse(content);
   }
-  
+
   throw new Error(`Неподдерживаемый формат файла: ${extension}`);
 };
