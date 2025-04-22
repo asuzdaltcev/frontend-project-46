@@ -2,8 +2,11 @@
 
 [![Actions Status](https://github.com/asuzdaltcev/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/asuzdaltcev/frontend-project-46/actions)
 [![Node CI](https://github.com/asuzdaltcev/frontend-project-46/actions/workflows/tests.yml/badge.svg)](https://github.com/asuzdaltcev/frontend-project-46/actions/workflows/tests.yml)
-[![Maintainability](https://api.codeclimate.com/v1/badges/YOUR_REPO_ID/maintainability)](https://codeclimate.com/github/asuzdaltcev/frontend-project-46/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/YOUR_REPO_ID/test_coverage)](https://codeclimate.com/github/asuzdaltcev/frontend-project-46/test_coverage)
+[![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=asuzdaltcev_frontend-project-46&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=asuzdaltcev_frontend-project-46)
+[![Test Coverage](https://sonarcloud.io/api/project_badges/measure?project=asuzdaltcev_frontend-project-46&metric=coverage)](https://sonarcloud.io/summary/new_code?id=asuzdaltcev_frontend-project-46)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=asuzdaltcev_frontend-project-46&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=asuzdaltcev_frontend-project-46)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=asuzdaltcev_frontend-project-46&metric=bugs)](https://sonarcloud.io/summary/new_code?id=asuzdaltcev_frontend-project-46)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=asuzdaltcev_frontend-project-46&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=asuzdaltcev_frontend-project-46)
 
 ## Описание
 
@@ -12,13 +15,29 @@
 ## Установка
 
 ```bash
-npm install
+make install
 ```
 
 ## Использование
 
 ```bash
 gendiff filepath1.json filepath2.json
+```
+
+## Разработка
+
+```bash
+# Запуск линтера
+make lint
+
+# Запуск тестов
+make test
+
+# Запуск тестов в режиме watch
+make test-watch
+
+# Запуск тестов с покрытием
+make test-coverage
 ```
 
 ## Пример работы

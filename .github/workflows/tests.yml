@@ -34,10 +34,13 @@ jobs:
       - name: Run tests
         run: npm run test:coverage
         
-      - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v5.0.0
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@master
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
-          coverageCommand: npm run test:coverage
-          debug: true 
+          args: >
+            -Dsonar.projectKey=asuzdaltcev_frontend-project-46
+            -Dsonar.organization=asuzdaltcev
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info 
