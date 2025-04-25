@@ -1,5 +1,4 @@
-import { defineConfig } from '@eslint/config-helpers';
-import jsEslint from '@eslint/js';
+import { defineConfig } from 'eslint-define-config';
 import stylistic from '@stylistic/eslint-plugin';
 import importPlugin from 'eslint-plugin-import';
 import nodePlugin from 'eslint-plugin-node';
@@ -39,4 +38,4 @@ export default defineConfig({
     'stylistic/semi': ['error', 'always'],
     'stylistic/comma-dangle': ['error', 'always-multiline'],
   },
-}); 
+});
