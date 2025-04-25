@@ -3,26 +3,22 @@ import jest from 'eslint-plugin-jest'
 
 export default [
   {
+    files: ['**/*.js'],
     plugins: {
       '@stylistic': stylistic,
-      jest: jest,
+      jest,
     },
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
       globals: {
-        // Jest globals
-        describe: true,
-        test: true,
-        expect: true,
-        beforeAll: true,
-        afterAll: true,
-        // Node.js globals
-        console: true,
-        process: true,
-        module: true,
-        require: true,
-        __dirname: true,
+        // Node.js
+        console: 'readonly',
+        process: 'readonly',
+        module: 'readonly',
+        require: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
       },
     },
     rules: {
@@ -40,9 +36,13 @@ export default [
   },
   {
     files: ['**/*.test.js', '**/*.spec.js'],
-    settings: {
-      jest: {
-        version: 29,
+    languageOptions: {
+      globals: {
+        describe: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
       },
     },
   },
