@@ -33,9 +33,11 @@ export default [
   {
     files: ['**/*.test.js', '**/__tests__/**/*.js'],
     plugins: {
-      'jest': eslintPluginJest,
+      jest: eslintPluginJest,
     },
     languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
       globals: {
         describe: true,
         test: true,
@@ -45,5 +47,8 @@ export default [
         it: true,
       },
     },
-  },
+    rules: {
+      'no-undef': 'off',
+    },
+  }
 ]
