@@ -1,9 +1,10 @@
+import { defineConfig } from '@eslint/config-helpers';
 import eslint from '@eslint/js';
 import nodePlugin from 'eslint-plugin-node';
 import importPlugin from 'eslint-plugin-import';
 import stylisticPlugin from '@stylistic/eslint-plugin';
 
-export default [
+export default defineConfig([
   eslint.configs.recommended,
   {
     files: ['**/*.js'],
@@ -39,4 +40,4 @@ export default [
       'stylistic/comma-dangle': ['error', 'always-multiline'],
     },
   },
-]; 
+]); 
