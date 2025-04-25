@@ -1,27 +1,33 @@
+import stylistic from '@stylistic/eslint-plugin'
 import globals from 'globals'
 
 export default [
-  {
-    languageOptions: {
-      globals: {
-        ...globals.node,
-        ...globals.jest,
-      },
-      parserOptions: {
-        sourceType: 'module',
-        ecmaVersion: 'latest',
-      },
+    {
+        ignores: ['node_modules/**', 'dist/**', 'coverage/**', 'coverage/lcov-report/**'],
     },
-    rules: {
-      'no-console': 'off',
-      'indent': ['error', 2],
-      'linebreak-style': ['error', 'unix'],
-      'quotes': ['error', 'single'],
-      'semi': ['error', 'never'],
-      'comma-dangle': ['error', 'always-multiline'],
+    {
+        languageOptions: {
+            ecmaVersion: 'latest',
+            sourceType: 'module',
+            globals: {
+                ...globals.node,
+                ...globals.jest,
+            },
+        },
+        plugins: {
+            '@stylistic': stylistic,
+        },
+        rules: {
+            'no-console': 'off',
+            'no-undef': 'error',
+            '@stylistic/indent': ['error', 4],
+            '@stylistic/linebreak-style': ['error', 'unix'],
+            '@stylistic/quotes': ['error', 'single'],
+            '@stylistic/semi': ['error', 'never'],
+            '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: false }],
+            '@stylistic/no-trailing-spaces': 'error',
+            '@stylistic/comma-dangle': ['error', 'always-multiline'],
+            '@stylistic/eol-last': ['error', 'always'],
+        },
     },
-  },
-  {
-    ignores: ['node_modules/**', 'dist/**', 'coverage/**', 'coverage/lcov-report/**'],
-  },
 ]
