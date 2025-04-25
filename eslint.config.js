@@ -1,52 +1,57 @@
-import { defineFlatConfig } from 'eslint-define-config';
-import stylistic from '@stylistic/eslint-plugin';
-import importPlugin from 'eslint-plugin-import';
-import nodePlugin from 'eslint-plugin-node';
-import jestPlugin from 'eslint-plugin-jest';
+import stylistic from '@stylistic/eslint-plugin'
+import jest from 'eslint-plugin-jest'
+import importPlugin from 'eslint-plugin-import'
+import { defineConfig } from 'eslint-define-config'
 
-export default defineFlatConfig([
+export default defineConfig([
   {
-    ignores: ['node_modules/**', 'dist/**', 'coverage/**'],
-  },
-  {
+    files: ['**/*.js'],
+    plugins: {
+      '@stylistic': stylistic,
+      jest,
+      import: importPlugin,
+    },
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
-    },
-    plugins: {
-      '@stylistic': stylistic,
-      import: importPlugin,
-      node: nodePlugin,
+      globals: {
+        // Node.js
+        console: 'readonly',
+        process: 'readonly',
+        module: 'readonly',
+        require: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+      },
     },
     rules: {
       'no-console': 'off',
       'no-undef': 'error',
-      'import/extensions': ['error', 'ignorePackages', { js: 'always' }],
-      'import/prefer-default-export': 'off',
-      'node/no-unsupported-features/es-syntax': 'off',
+      'import/no-unresolved': 'error',
+      'import/named': 'error',
+      'import/default': 'error',
+      'import/namespace': 'error',
+      'import/export': 'error',
       '@stylistic/indent': ['error', 2],
+      '@stylistic/linebreak-style': ['error', 'unix'],
+      '@stylistic/quotes': ['error', 'single'],
       '@stylistic/semi': ['error', 'never'],
+      '@stylistic/arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
+      '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: false }],
+      '@stylistic/no-trailing-spaces': 'error',
       '@stylistic/comma-dangle': ['error', 'always-multiline'],
     },
   },
   {
-    files: ['**/*.test.js', '**/*.spec.js', '**/__tests__/**/*.js'],
+    files: ['**/*.test.js', '**/*.spec.js'],
     languageOptions: {
       globals: {
-        describe: true,
-        test: true,
-        expect: true,
-        beforeAll: true,
-        afterAll: true,
-        beforeEach: true,
-        afterEach: true,
+        describe: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
       },
     },
-    plugins: {
-      jest: jestPlugin,
-    },
-    rules: {
-      'no-undef': 'off', // отключаем для тестов, чтобы не ругался на jest-глобали
-    },
   },
-]);
+])
