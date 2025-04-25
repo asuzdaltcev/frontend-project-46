@@ -19,7 +19,6 @@ program
     try {
       console.log(genDiff(filepath1, filepath2, options.format))
     }
-    
     catch (error) {
       console.error(`Ошибка: ${error.message}`)
       process.exit(1)

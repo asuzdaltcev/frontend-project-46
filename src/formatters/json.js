@@ -7,7 +7,6 @@ export const formatDiffJson = (diff) => {
   try {
     return JSON.stringify(diff, null, 2)
   }
-
   catch (error) {
     throw new Error(`Ошибка форматирования в JSON: ${error.message}`)
   }
