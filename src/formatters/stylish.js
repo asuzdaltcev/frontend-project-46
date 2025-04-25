@@ -22,13 +22,13 @@ const formatDiff = (diff, depth = 1) => {
 
     switch (type) {
       case 'nested':
-        return `${getIndent(depth)}${key}: {\n${formatDiff(children, depth + 1)}\n${getIndent(depth)} }`;
+        return [`${getIndent(depth)}${key}: {\n${formatDiff(children, depth + 1)}\n${getIndent(depth)} }`];
       case 'unchanged':
-        return `${getIndent(depth)}${key}: ${stringify(value, depth)}`;
+        return [`${getIndent(depth)}${key}: ${stringify(value, depth)}`];
       case 'added':
-        return `${getIndent(depth, '+')}${key}: ${stringify(value, depth)}`;
+        return [`${getIndent(depth, '+')}${key}: ${stringify(value, depth)}`];
       case 'removed':
-        return `${getIndent(depth, '-')}${key}: ${stringify(value, depth)}`;
+        return [`${getIndent(depth, '-')}${key}: ${stringify(value, depth)}`];
       case 'changed':
         return [
           `${getIndent(depth, '-')}${key}: ${stringify(oldValue, depth)}`,
