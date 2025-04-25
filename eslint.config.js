@@ -1,9 +1,8 @@
-import { defineConfig } from 'eslint-define-config';
 import stylistic from '@stylistic/eslint-plugin';
 import importPlugin from 'eslint-plugin-import';
 import nodePlugin from 'eslint-plugin-node';
 
-export default defineConfig({
+export default {
   ignores: ['node_modules/**', 'dist/**', 'coverage/**', '**/coverage/**'],
 
   languageOptions: {
@@ -38,4 +37,4 @@ export default defineConfig({
     'stylistic/semi': ['error', 'always'],
     'stylistic/comma-dangle': ['error', 'always-multiline'],
   },
-});
+};
