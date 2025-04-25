@@ -1,48 +1,44 @@
 import { defineFlatConfig } from 'eslint-define-config'
+import eslintPluginNode from 'eslint-plugin-node'
+import eslintPluginImport from 'eslint-plugin-import'
 import stylistic from '@stylistic/eslint-plugin'
-import importPlugin from 'eslint-plugin-import'
-import nodePlugin from 'eslint-plugin-node'
-import jestPlugin from 'eslint-plugin-jest'
+import eslintPluginJest from 'eslint-plugin-jest'
 
 export default defineFlatConfig([
   {
     ignores: ['node_modules/**', 'dist/**', 'coverage/**'],
   },
   {
-    files: ['**/*.js'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
       globals: {
-        // Node.js globals
-        console: true,
-        process: true,
-        module: true,
-        require: true,
-        __dirname: true,
-        __filename: true,
+        console: 'readonly',
+        process: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
       },
     },
     plugins: {
-      '@stylistic': stylistic,
-      import: importPlugin,
-      node: nodePlugin,
+      node: eslintPluginNode,
+      import: eslintPluginImport,
+      stylistic,
     },
     rules: {
-      'no-console': 'off',
-      'no-undef': 'error',
       'import/extensions': ['error', 'ignorePackages', { js: 'always' }],
-      'import/prefer-default-export': 'off',
+      'no-console': 'off',
       'node/no-unsupported-features/es-syntax': 'off',
-      '@stylistic/indent': ['error', 2],
-      '@stylistic/semi': ['error', 'never'],
-      '@stylistic/comma-dangle': ['error', 'always-multiline'],
-      '@stylistic/brace-style': ['error', '1tbs'],
-      '@stylistic/quote-props': ['error', 'as-needed'],
+      'stylistic/indent': ['error', 2],
+      'stylistic/semi': ['error', 'never'],
+      'stylistic/quotes': ['error', 'single'],
+      'stylistic/comma-dangle': ['error', 'always-multiline'],
     },
   },
   {
-    files: ['**/__tests__/**/*.js', '**/*.test.js', '**/*.spec.js'],
+    files: ['**/*.test.js', '**/*.spec.js'],
+    plugins: {
+      jest: eslintPluginJest,
+    },
     languageOptions: {
       globals: {
         describe: 'readonly',
@@ -50,15 +46,10 @@ export default defineFlatConfig([
         expect: 'readonly',
         beforeAll: 'readonly',
         afterAll: 'readonly',
-        beforeEach: 'readonly',
-        afterEach: 'readonly',
       },
     },
-    plugins: {
-      jest: jestPlugin,
-    },
     rules: {
-      'no-undef': 'off', // отключить, иначе будет ругаться на jest-глобали
+      'no-undef': 'off',
     },
   },
 ])
