@@ -6,9 +6,11 @@ import eslintPluginJest from 'eslint-plugin-jest'
 
 export default defineFlatConfig([
   {
+    // Игнорируемые директории
     ignores: ['node_modules/**', 'dist/**', 'coverage/**'],
   },
   {
+    // Основная конфигурация для JS
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
@@ -35,21 +37,18 @@ export default defineFlatConfig([
     },
   },
   {
-    files: ['**/*.test.js', '**/*.spec.js'],
+    // Конфигурация для тестов (jest)
+    files: ['**/*.test.js', '**/*.spec.js', '**/__tests__/**/*.js'],
     plugins: {
       jest: eslintPluginJest,
     },
     languageOptions: {
-      globals: {
-        describe: 'readonly',
-        test: 'readonly',
-        expect: 'readonly',
-        beforeAll: 'readonly',
-        afterAll: 'readonly',
+      env: {
+        jest: true,
       },
     },
     rules: {
-      'no-undef': 'off',
+      // Можно добавить специфичные правила для тестов, если нужно
     },
   },
 ])
