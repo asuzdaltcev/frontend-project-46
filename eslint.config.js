@@ -1,6 +1,7 @@
 import eslint from '@eslint/js';
 import nodePlugin from 'eslint-plugin-node';
 import importPlugin from 'eslint-plugin-import';
+import stylisticPlugin from '@stylistic/eslint-plugin';
 
 export default [
   eslint.configs.recommended,
@@ -9,6 +10,7 @@ export default [
     plugins: {
       node: nodePlugin,
       import: importPlugin,
+      stylistic: stylisticPlugin,
     },
     languageOptions: {
       ecmaVersion: 2022,
@@ -32,6 +34,9 @@ export default [
       'import/prefer-default-export': 'off',
       'no-console': 'off',
       'node/no-unsupported-features/es-syntax': 'off',
+      'stylistic/indent': ['error', 2],
+      'stylistic/semi': ['error', 'always'],
+      'stylistic/comma-dangle': ['error', 'always-multiline'],
     },
   },
 ]; 
