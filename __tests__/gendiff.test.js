@@ -151,4 +151,42 @@ describe('gendiff', () => {
     expect(output).toContain('Property \'group2\' was removed');
     expect(output).toContain('Property \'group3\' was added with value: [complex value]');
   });
+
+  test('should generate diff in JSON format', () => {
+    const file1 = getFixturePath('file1.json');
+    const file2 = getFixturePath('file2.json');
+    const output = genDiff(file1, file2, 'json');
+
+    // Проверяем, что вывод является валидным JSON
+    expect(() => JSON.parse(output)).not.toThrow();
+
+    const parsedOutput = JSON.parse(output);
+
+    // Проверяем структуру JSON
+    expect(Array.isArray(parsedOutput)).toBeTruthy();
+
+    // Проверяем некоторые ключевые элементы
+    const commonNode = parsedOutput.find((node) => node.key === 'common');
+    expect(commonNode).toBeDefined();
+    expect(commonNode.type).toBe('nested');
+    expect(Array.isArray(commonNode.children)).toBeTruthy();
+
+    // Проверяем добавленное свойство
+    const followProperty = commonNode.children.find((child) => child.key === 'follow');
+    expect(followProperty).toBeDefined();
+    expect(followProperty.type).toBe('added');
+    expect(followProperty.value).toBe(false);
+
+    // Проверяем измененное свойство
+    const setting3Property = commonNode.children.find((child) => child.key === 'setting3');
+    expect(setting3Property).toBeDefined();
+    expect(setting3Property.type).toBe('changed');
+    expect(setting3Property.oldValue).toBe(true);
+    expect(setting3Property.newValue).toBeNull();
+
+    // Проверяем удаленное свойство
+    const group2Node = parsedOutput.find((node) => node.key === 'group2');
+    expect(group2Node).toBeDefined();
+    expect(group2Node.type).toBe('removed');
+  });
 });

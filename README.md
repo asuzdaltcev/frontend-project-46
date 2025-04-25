@@ -146,6 +146,71 @@ $ gendiff file1.json file2.json
 - Support for JSON and YAML formats
 - Comparison of nested structures
 - Stylish output format (default)
+- Plain text output format
+- JSON output format
 - Support for different value types (strings, numbers, booleans, null, objects)
 
 [![asciicast](https://asciinema.org/a/hTXWYXRXfhFpqXYUJoOViG8xY.svg)](https://asciinema.org/a/hTXWYXRXfhFpqXYUJoOViG8xY)
+
+### Вывод в формате plain
+
+Для вывода результата в формате plain используйте опцию --format plain:
+
+```bash
+$ gendiff --format plain filepath1.json filepath2.json
+Property 'common.follow' was added with value: false
+Property 'common.setting2' was removed
+Property 'common.setting3' was updated. From true to null
+Property 'common.setting4' was added with value: 'blah blah'
+Property 'common.setting5' was added with value: [complex value]
+Property 'common.setting6.doge.wow' was updated. From '' to 'so much'
+Property 'common.setting6.ops' was added with value: 'vops'
+Property 'group1.baz' was updated. From 'bas' to 'bars'
+Property 'group1.nest' was updated. From [complex value] to 'str'
+Property 'group2' was removed
+Property 'group3' was added with value: [complex value]
+```
+
+### Вывод в формате JSON
+
+Для вывода результата в формате JSON используйте опцию --format json:
+
+```bash
+$ gendiff --format json filepath1.json filepath2.json
+[
+  {
+    "key": "common",
+    "type": "nested",
+    "children": [
+      {
+        "key": "follow",
+        "type": "added",
+        "value": false
+      },
+      {
+        "key": "setting1",
+        "type": "unchanged",
+        "value": "Value 1"
+      },
+      {
+        "key": "setting2",
+        "type": "removed",
+        "value": 200,
+        "oldValue": 200
+      },
+      {
+        "key": "setting3",
+        "type": "changed",
+        "oldValue": true,
+        "newValue": null
+      }
+      // ... другие свойства
+    ]
+  }
+  // ... другие группы
+]
+```
+
+Формат JSON удобен для программной обработки результатов сравнения и интеграции с другими системами.
+
+[![asciicast](https://asciinema.org/a/C8h2F9fihUbx7zbM8mcVIwRPB.svg)](https://asciinema.org/a/C8h2F9fihUbx7zbM8mcVIwRPB)
