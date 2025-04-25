@@ -14,8 +14,13 @@ program
   .description('Compares two configuration files and shows a difference.')
   .version(pkg.version)
   .arguments('<filepath1> <filepath2>')
-  .option('-f, --format [type]', 'output format')
-  .action((filepath1, filepath2) => {
-    console.log(genDiff(filepath1, filepath2));
+  .option('-f, --format <type>', 'output format', 'stylish')
+  .action((filepath1, filepath2, options) => {
+    try {
+      console.log(genDiff(filepath1, filepath2, options.format));
+    } catch (error) {
+      console.error(`Ошибка: ${error.message}`);
+      process.exit(1);
+    }
   })
   .parse(process.argv);

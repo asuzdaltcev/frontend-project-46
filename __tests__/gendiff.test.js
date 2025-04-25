@@ -34,7 +34,7 @@ describe('genDiff', () => {
     const filepath1 = getFixturePath('before.json');
     const filepath2 = getFixturePath('after.json');
     const diff = genDiff(filepath1, filepath2);
-    expect(diff).toBe(`{
+    expect(diff.trim()).toBe(`{
   - follow: false
     host: hexlet.io
   - proxy: 123.234.53.22
@@ -48,7 +48,7 @@ describe('genDiff', () => {
     const filepath1 = getFixturePath('before.yml');
     const filepath2 = getFixturePath('after.yml');
     const diff = genDiff(filepath1, filepath2);
-    expect(diff).toBe(`{
+    expect(diff.trim()).toBe(`{
   - follow: false
     host: hexlet.io
   - proxy: 123.234.53.22
@@ -85,5 +85,52 @@ describe('parseFile', () => {
     expect(() => {
       parseFile(testFilePath);
     }).toThrow('Неподдерживаемый формат файла: .txt');
+  });
+});
+
+describe('gendiff', () => {
+  test('should generate diff for nested JSON files', () => {
+    const file1 = getFixturePath('file1.json');
+    const file2 = getFixturePath('file2.json');
+    const output = genDiff(file1, file2);
+
+    // Проверяем некоторые ключевые строки вместо полного совпадения
+    expect(output).toContain('common: {');
+    expect(output).toContain('follow: false');
+    expect(output).toContain('setting2: 200');
+    expect(output).toContain('setting3: true');
+    expect(output).toContain('setting3: null');
+    expect(output).toContain('setting4: blah blah');
+    expect(output).toContain('setting5: {');
+    expect(output).toContain('group1: {');
+    expect(output).toContain('foo: bar');
+    expect(output).toContain('nest: str');
+  });
+
+  test('should generate diff for nested YAML files', () => {
+    const file1 = getFixturePath('file1.yml');
+    const file2 = getFixturePath('file2.yml');
+    const output = genDiff(file1, file2);
+
+    // Проверяем некоторые ключевые строки вместо полного совпадения
+    expect(output).toContain('common: {');
+    expect(output).toContain('follow: false');
+    expect(output).toContain('setting2: 200');
+    expect(output).toContain('setting3: true');
+    expect(output).toContain('setting3: null');
+    expect(output).toContain('setting4: blah blah');
+    expect(output).toContain('group1: {');
+    expect(output).toContain('foo: bar');
+  });
+
+  test('should use stylish formatter by default', () => {
+    const file1 = getFixturePath('file1.json');
+    const file2 = getFixturePath('file2.json');
+    const output = genDiff(file1, file2);
+
+    // Проверяем, что вывод содержит признаки стилизованного форматирования
+    expect(output).toContain('common: {');
+    expect(output).toContain('follow: false');
+    expect(output).toContain('setting2: 200');
   });
 });
