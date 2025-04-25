@@ -1,7 +1,8 @@
 import stylistic from '@stylistic/eslint-plugin'
 import jest from 'eslint-plugin-jest'
+import { defineConfig } from 'eslint-define-config'
 
-export default [
+export default defineConfig([
   {
     files: ['**/*.js'],
     plugins: {
@@ -46,4 +47,4 @@ export default [
       },
     },
   },
-]
+])
