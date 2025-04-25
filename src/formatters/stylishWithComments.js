@@ -24,10 +24,7 @@ const getComment = (type, isOldValue) => {
   }
 };
 
-// Forward declaration
-let formatStylish;
-
-const formatNode = (node, depth = 0) => {
+const formatNode = (node, formatNestedFn, depth = 0) => {
   const indent = ' '.repeat(depth * 2);
   const {
     key, type, value, value1, value2, children,
@@ -35,7 +32,7 @@ const formatNode = (node, depth = 0) => {
 
   switch (type) {
     case 'nested':
-      return `${indent}    ${key}: {\n${formatStylish(children, depth + 1)}\n${indent}    }`;
+      return `${indent}    ${key}: {\n${formatNestedFn(children, depth + 1)}\n${indent}    }`;
     case 'unchanged':
       return `${indent}    ${key}: ${formatValue(value, depth)}`;
     case 'added':
@@ -49,9 +46,9 @@ const formatNode = (node, depth = 0) => {
   }
 };
 
-// Затем определяем formatStylish
-formatStylish = (diff, depth = 0) => {
-  const lines = diff.map((node) => formatNode(node, depth));
+const formatStylish = (diff, depth = 0) => {
+  const formatFn = (children, newDepth) => formatStylish(children, newDepth);
+  const lines = diff.map((node) => formatNode(node, formatFn, depth));
   return lines.join('\n');
 };
 

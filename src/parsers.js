@@ -2,30 +2,32 @@ import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
 
-export const parseFile = (filepath) => {
-  // Преобразуем путь в абсолютный, если он относительный
-  let absolutePath;
-  if (path.isAbsolute(filepath)) {
-    absolutePath = filepath;
-  } else {
-    // Используем текущую рабочую директорию для относительных путей
-    absolutePath = path.resolve(process.cwd(), filepath);
+const getAbsolutePath = (filepath) => (
+  path.isAbsolute(filepath)
+    ? filepath
+    : path.resolve(process.cwd(), filepath)
+);
+
+const getFixturesPath = (filepath) => (
+  path.resolve(process.cwd(), '__fixtures__', path.basename(filepath))
+);
+
+const getValidPath = (filepath) => {
+  const initialPath = getAbsolutePath(filepath);
+
+  if (fs.existsSync(initialPath)) {
+    return initialPath;
   }
 
-  // Проверяем существование файла
-  if (!fs.existsSync(absolutePath)) {
-    // Если файл не найден, пробуем искать в директории __fixtures__
-    const fixturesPath = path.resolve(process.cwd(), '__fixtures__', path.basename(filepath));
-    if (fs.existsSync(fixturesPath)) {
-      absolutePath = fixturesPath;
-    } else {
-      throw new Error(`Файл не найден: ${filepath}`);
-    }
+  const fixturesPath = getFixturesPath(filepath);
+  if (fs.existsSync(fixturesPath)) {
+    return fixturesPath;
   }
 
-  const content = fs.readFileSync(absolutePath, 'utf-8');
-  const extension = path.extname(filepath).toLowerCase();
+  throw new Error(`Файл не найден: ${filepath}`);
+};
 
+const parseContent = (content, extension) => {
   if (extension === '.json') {
     return JSON.parse(content);
   }
@@ -35,4 +37,12 @@ export const parseFile = (filepath) => {
   }
 
   throw new Error(`Неподдерживаемый формат файла: ${extension}`);
+};
+
+export const parseFile = (filepath) => {
+  const validPath = getValidPath(filepath);
+  const content = fs.readFileSync(validPath, 'utf-8');
+  const extension = path.extname(filepath).toLowerCase();
+
+  return parseContent(content, extension);
 };
