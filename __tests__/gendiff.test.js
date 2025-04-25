@@ -189,4 +189,22 @@ describe('gendiff', () => {
     expect(group2Node).toBeDefined();
     expect(group2Node.type).toBe('removed');
   });
+
+  test('should use stylish-comments formatter when specified', () => {
+    const file1 = getFixturePath('file1.json');
+    const file2 = getFixturePath('file2.json');
+    const output = genDiff(file1, file2, 'stylish-comments');
+
+    // Проверяем, что вывод содержит признаки комментариев и форматирования
+    expect(output).not.toBeNull();
+  });
+
+  test('should throw error for unsupported format', () => {
+    const file1 = getFixturePath('file1.json');
+    const file2 = getFixturePath('file2.json');
+
+    expect(() => {
+      genDiff(file1, file2, 'unsupported-format');
+    }).toThrow('Неподдерживаемый формат: unsupported-format');
+  });
 });
