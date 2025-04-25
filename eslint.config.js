@@ -1,16 +1,13 @@
 import { defineFlatConfig } from 'eslint-define-config'
-import eslintPluginNode from 'eslint-plugin-node'
-import eslintPluginImport from 'eslint-plugin-import'
 import stylistic from '@stylistic/eslint-plugin'
 import eslintPluginJest from 'eslint-plugin-jest'
 
 export default defineFlatConfig([
   {
-    // Игнорируемые директории
     ignores: ['node_modules/**', 'dist/**', 'coverage/**'],
   },
   {
-    // Основная конфигурация для JS
+    files: ['**/*.js'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
@@ -22,14 +19,10 @@ export default defineFlatConfig([
       },
     },
     plugins: {
-      node: eslintPluginNode,
-      import: eslintPluginImport,
       stylistic,
     },
     rules: {
-      'import/extensions': ['error', 'ignorePackages', { js: 'always' }],
       'no-console': 'off',
-      'node/no-unsupported-features/es-syntax': 'off',
       'stylistic/indent': ['error', 2],
       'stylistic/semi': ['error', 'never'],
       'stylistic/quotes': ['error', 'single'],
@@ -37,18 +30,22 @@ export default defineFlatConfig([
     },
   },
   {
-    // Конфигурация для тестов (jest)
-    files: ['**/*.test.js', '**/*.spec.js', '**/__tests__/**/*.js'],
+    files: ['**/__tests__/**/*.js', '**/*.test.js', '**/*.spec.js'],
     plugins: {
       jest: eslintPluginJest,
     },
     languageOptions: {
-      env: {
-        jest: true,
+      globals: {
+        describe: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+        it: 'readonly',
       },
     },
     rules: {
-      // Можно добавить специфичные правила для тестов, если нужно
+      'no-undef': 'off',
     },
   },
 ])
