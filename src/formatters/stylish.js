@@ -30,22 +30,22 @@ const formatDiff = (diff, depth = 1) => {
     const { type, key, value, oldValue, newValue, children } = node
 
     switch (type) {
-      case 'nested': {
-        return `${indentForKey}${key}: {\n${formatDiff(children, depth + 1)}\n${indentForKey}}`
-      }
-      case 'unchanged':
-        return `${indentForKey}${key}: ${stringify(value, depth + 1)}`
-      case 'added':
-        return `${indentForSign}+ ${key}: ${stringify(value, depth + 1)}`
-      case 'removed':
-        return `${indentForSign}- ${key}: ${stringify(value, depth + 1)}`
-      case 'changed':
-        return [
-          `${indentForSign}- ${key}: ${stringify(oldValue, depth + 1)}`,
-          `${indentForSign}+ ${key}: ${stringify(newValue, depth + 1)}`,
-        ]
-      default:
-        throw new Error(`Unknown type: ${type}`)
+    case 'nested': {
+      return `${indentForKey}${key}: {\n${formatDiff(children, depth + 1)}\n${indentForKey}}`
+    }
+    case 'unchanged':
+      return `${indentForKey}${key}: ${stringify(value, depth + 1)}`
+    case 'added':
+      return `${indentForSign}+ ${key}: ${stringify(value, depth + 1)}`
+    case 'removed':
+      return `${indentForSign}- ${key}: ${stringify(value, depth + 1)}`
+    case 'changed':
+      return [
+        `${indentForSign}- ${key}: ${stringify(oldValue, depth + 1)}`,
+        `${indentForSign}+ ${key}: ${stringify(newValue, depth + 1)}`,
+      ]
+    default:
+      throw new Error(`Unknown type: ${type}`)
     }
   })
 

@@ -1,59 +1,27 @@
-import stylistic from '@stylistic/eslint-plugin'
-import eslintPluginJest from 'eslint-plugin-jest'
+import globals from 'globals'
 
 export default [
   {
-    ignores: ['node_modules/**', 'dist/**', 'coverage/**', 'coverage/lcov-report/**'],
-  },
-  {
-    linterOptions: {
-      reportUnusedDisableDirectives: true,
-    },
     languageOptions: {
-      ecmaVersion: 2022,
-      sourceType: 'module',
-      parserOptions: {
-        ecmaVersion: 2022,
-        sourceType: 'module',
-      },
       globals: {
-        console: 'readonly',
-        process: 'readonly',
-        __dirname: 'readonly',
-        __filename: 'readonly',
+        ...globals.node,
+        ...globals.jest,
       },
-    },
-    plugins: {
-      '@stylistic': stylistic,
-      'jest': eslintPluginJest,
+      parserOptions: {
+        sourceType: 'module',
+        ecmaVersion: 'latest',
+      },
     },
     rules: {
       'no-console': 'off',
-      'no-undef': 'error',
-      '@stylistic/indent': ['error', 2],
-      '@stylistic/linebreak-style': ['error', 'unix'],
-      '@stylistic/quotes': ['error', 'single'],
-      '@stylistic/semi': ['error', 'never'],
-      '@stylistic/arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
-      '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: false }],
-      '@stylistic/no-trailing-spaces': 'error',
-      '@stylistic/comma-dangle': ['error', 'always-multiline'],
+      'indent': ['error', 2],
+      'linebreak-style': ['error', 'unix'],
+      'quotes': ['error', 'single'],
+      'semi': ['error', 'never'],
+      'comma-dangle': ['error', 'always-multiline'],
     },
   },
   {
-    files: ['**/*.test.js', '**/__tests__/**/*.js'],
-    rules: {
-      'jest/globals': 'off',
-    },
-    languageOptions: {
-      globals: {
-        describe: 'readonly',
-        test: 'readonly',
-        expect: 'readonly',
-        beforeAll: 'readonly',
-        afterAll: 'readonly',
-        it: 'readonly',
-      },
-    },
+    ignores: ['node_modules/**', 'dist/**', 'coverage/**', 'coverage/lcov-report/**'],
   },
 ]
