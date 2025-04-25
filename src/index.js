@@ -1,8 +1,5 @@
 import { parseFile } from './parsers.js';
-import stylish from './formatters/stylish.js';
-import { formatDiffStylishWithComments } from './formatters/stylishWithComments.js';
-import { formatDiffPlain } from './formatters/plain.js';
-import { formatDiffJson } from './formatters/json.js';
+import formatter from './formatters/index.js';
 
 const buildDiff = (obj1, obj2) => {
   const keys = new Set([...Object.keys(obj1), ...Object.keys(obj2)]);
@@ -40,18 +37,7 @@ const genDiff = (filepath1, filepath2, format = 'stylish') => {
   const obj2 = parseFile(filepath2);
   const diff = buildDiff(obj1, obj2);
 
-  switch (format) {
-    case 'stylish':
-      return stylish(diff);
-    case 'stylish-comments':
-      return formatDiffStylishWithComments(diff);
-    case 'plain':
-      return formatDiffPlain(diff);
-    case 'json':
-      return formatDiffJson(diff);
-    default:
-      throw new Error(`Неподдерживаемый формат: ${format}`);
-  }
+  return formatter(diff, format);
 };
 
 export { genDiff };

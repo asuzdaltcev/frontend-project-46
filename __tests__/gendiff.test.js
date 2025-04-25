@@ -133,4 +133,22 @@ describe('gendiff', () => {
     expect(output).toContain('follow: false');
     expect(output).toContain('setting2: 200');
   });
+
+  test('should generate diff in plain format', () => {
+    const file1 = getFixturePath('file1.json');
+    const file2 = getFixturePath('file2.json');
+    const output = genDiff(file1, file2, 'plain');
+
+    expect(output).toContain('Property \'common.follow\' was added with value: false');
+    expect(output).toContain('Property \'common.setting2\' was removed');
+    expect(output).toContain('Property \'common.setting3\' was updated. From true to null');
+    expect(output).toContain('Property \'common.setting4\' was added with value: \'blah blah\'');
+    expect(output).toContain('Property \'common.setting5\' was added with value: [complex value]');
+    expect(output).toContain('Property \'common.setting6.doge.wow\' was updated. From \'\' to \'so much\'');
+    expect(output).toContain('Property \'common.setting6.ops\' was added with value: \'vops\'');
+    expect(output).toContain('Property \'group1.baz\' was updated. From \'bas\' to \'bars\'');
+    expect(output).toContain('Property \'group1.nest\' was updated. From [complex value] to \'str\'');
+    expect(output).toContain('Property \'group2\' was removed');
+    expect(output).toContain('Property \'group3\' was added with value: [complex value]');
+  });
 });
