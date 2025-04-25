@@ -1,10 +1,22 @@
-module.exports = {
-  env: {
-    es2022: true,
-    node: true,
+import stylistic from '@stylistic/eslint-plugin'
+import eslintPluginJest from 'eslint-plugin-jest'
+
+export default {
+  linterOptions: {
+    reportUnusedDisableDirectives: true,
   },
-  extends: ['eslint:recommended'],
-  plugins: ['@stylistic'],
+  languageOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+    parserOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+    },
+  },
+  plugins: {
+    '@stylistic': stylistic,
+    'jest': eslintPluginJest,
+  },
   rules: {
     'no-console': 'off',
     'no-undef': 'error',
@@ -20,11 +32,20 @@ module.exports = {
   overrides: [
     {
       files: ['**/*.test.js', '**/__tests__/**/*.js'],
-      plugins: ['jest'],
-      env: {
-        'jest/globals': true
-      }
+      rules: {
+        'jest/globals': 'off',
+      },
+      languageOptions: {
+        globals: {
+          describe: 'readonly',
+          test: 'readonly',
+          expect: 'readonly',
+          beforeAll: 'readonly',
+          afterAll: 'readonly',
+          it: 'readonly',
+        },
+      },
     }
   ],
-  ignorePatterns: ['node_modules/', 'dist/', 'coverage/', 'coverage/lcov-report/'],
+  ignores: ['node_modules/**', 'dist/**', 'coverage/**', 'coverage/lcov-report/**'],
 }
