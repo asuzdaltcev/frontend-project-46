@@ -31,14 +31,14 @@ const formatDiff = (diff, depth = 1) => {
 
     switch (type) {
       case 'nested': {
-        return `${indentForKey}${key}: {\n${formatDiff(children, depth + 1)}\n${indentForKey}}`
+        return [`${indentForKey}${key}: {\n${formatDiff(children, depth + 1)}\n${indentForKey}}`]
       }
       case 'unchanged':
-        return `${indentForKey}${key}: ${stringify(value, depth + 1)}`
+        return [`${indentForKey}${key}: ${stringify(value, depth + 1)}`]
       case 'added':
-        return `${indentForSign}+ ${key}: ${stringify(value, depth + 1)}`
+        return [`${indentForSign}+ ${key}: ${stringify(value, depth + 1)}`]
       case 'removed':
-        return `${indentForSign}- ${key}: ${stringify(value, depth + 1)}`
+        return [`${indentForSign}- ${key}: ${stringify(value, depth + 1)}`]
       case 'changed':
         return [
           `${indentForSign}- ${key}: ${stringify(oldValue, depth + 1)}`,
