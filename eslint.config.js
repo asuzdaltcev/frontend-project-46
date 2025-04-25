@@ -1,4 +1,4 @@
-import stylistic from '@stylistic/eslint-plugin';
+import stylistic from '@stylistic/eslint-plugin'
 
 export default {
   plugins: {
@@ -8,15 +8,18 @@ export default {
     ecmaVersion: 2022,
     sourceType: 'module',
     globals: {
-      console: true,
-      process: true,
-      module: true,
-      require: true,
-      __dirname: true,
-      jest: true,
-      describe: true,
-      test: true,
-      expect: true,
+      // Jest globals
+      describe: 'readonly',
+      test: 'readonly',
+      expect: 'readonly',
+      beforeAll: 'readonly',
+      afterAll: 'readonly',
+      // Node.js globals
+      console: 'readonly',
+      process: 'readonly',
+      module: 'readonly',
+      require: 'readonly',
+      __dirname: 'readonly',
     },
   },
   rules: {
@@ -24,6 +27,7 @@ export default {
     '@stylistic/indent': ['error', 2],
     '@stylistic/linebreak-style': ['error', 'unix'],
     '@stylistic/quotes': ['error', 'single'],
-    '@stylistic/semi': ['error', 'always'],
+    '@stylistic/semi': ['error', 'never'],
+    '@stylistic/arrow-parens': ['error', 'as-needed'],
   },
-};
+}
