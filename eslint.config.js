@@ -1,8 +1,8 @@
-import { defineFlatConfig } from 'eslint-define-config';
-import stylistic from '@stylistic/eslint-plugin';
-import importPlugin from 'eslint-plugin-import';
-import nodePlugin from 'eslint-plugin-node';
-import jestPlugin from 'eslint-plugin-jest';
+import { defineFlatConfig } from 'eslint-define-config'
+import stylistic from '@stylistic/eslint-plugin'
+import importPlugin from 'eslint-plugin-import'
+import nodePlugin from 'eslint-plugin-node'
+import jestPlugin from 'eslint-plugin-jest'
 
 export default defineFlatConfig([
   {
@@ -13,6 +13,15 @@ export default defineFlatConfig([
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
+      globals: {
+        // Node.js globals
+        console: true,
+        process: true,
+        module: true,
+        require: true,
+        __dirname: true,
+        __filename: true,
+      },
     },
     plugins: {
       '@stylistic': stylistic,
@@ -52,4 +61,4 @@ export default defineFlatConfig([
       'no-undef': 'off', // отключить, иначе будет ругаться на jest-глобали
     },
   },
-]);
+])
