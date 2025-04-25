@@ -4,7 +4,7 @@ import importPlugin from 'eslint-plugin-import';
 import nodePlugin from 'eslint-plugin-node';
 
 export default defineConfig({
-  ignores: ['node_modules/**', 'dist/**', 'coverage/**', 'coverage/lcov-report/**'],
+  ignores: ['node_modules/**', 'dist/**', 'coverage/**', '**/coverage/**'],
 
   languageOptions: {
     ecmaVersion: 2022,
