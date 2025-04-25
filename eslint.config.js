@@ -1,4 +1,9 @@
+import stylistic from '@stylistic/eslint-plugin';
+
 export default {
+  plugins: {
+    '@stylistic': stylistic,
+  },
   languageOptions: {
     ecmaVersion: 2022,
     sourceType: 'module',
@@ -16,9 +21,9 @@ export default {
   },
   rules: {
     'no-console': 'off',
-    indent: ['error', 2],
-    'linebreak-style': ['error', 'unix'],
-    quotes: ['error', 'single'],
-    semi: ['error', 'always'],
+    '@stylistic/indent': ['error', 2],
+    '@stylistic/linebreak-style': ['error', 'unix'],
+    '@stylistic/quotes': ['error', 'single'],
+    '@stylistic/semi': ['error', 'always'],
   },
 };

@@ -18,18 +18,18 @@ const formatNode = (node, path = '') => {
   const currentPath = path ? `${path}.${key}` : key;
 
   switch (type) {
-  case 'nested':
-    return children.map((child) => formatNode(child, currentPath)).filter(Boolean).join('\n');
-  case 'unchanged':
-    return '';
-  case 'added':
-    return `Property '${currentPath}' was added with value: ${formatValue(value)}`;
-  case 'removed':
-    return `Property '${currentPath}' was removed`;
-  case 'changed':
-    return `Property '${currentPath}' was updated. From ${formatValue(oldValue)} to ${formatValue(newValue)}`;
-  default:
-    return '';
+    case 'nested':
+      return children.map((child) => formatNode(child, currentPath)).filter(Boolean).join('\n');
+    case 'unchanged':
+      return '';
+    case 'added':
+      return `Property '${currentPath}' was added with value: ${formatValue(value)}`;
+    case 'removed':
+      return `Property '${currentPath}' was removed`;
+    case 'changed':
+      return `Property '${currentPath}' was updated. From ${formatValue(oldValue)} to ${formatValue(newValue)}`;
+    default:
+      return '';
   }
 };
 
