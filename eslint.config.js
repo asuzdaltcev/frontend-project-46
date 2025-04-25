@@ -1,51 +1,30 @@
-import { defineFlatConfig } from 'eslint-define-config'
-import stylistic from '@stylistic/eslint-plugin'
-import eslintPluginJest from 'eslint-plugin-jest'
-
-export default defineFlatConfig([
-  {
-    ignores: ['node_modules/**', 'dist/**', 'coverage/**'],
+module.exports = {
+  env: {
+    es2022: true,
+    node: true,
   },
-  {
-    files: ['**/*.js'],
-    languageOptions: {
-      ecmaVersion: 2022,
-      sourceType: 'module',
-      globals: {
-        console: 'readonly',
-        process: 'readonly',
-        __dirname: 'readonly',
-        __filename: 'readonly',
-      },
-    },
-    plugins: {
-      stylistic,
-    },
-    rules: {
-      'no-console': 'off',
-      'stylistic/indent': ['error', 2],
-      'stylistic/semi': ['error', 'never'],
-      'stylistic/quotes': ['error', 'single'],
-      'stylistic/comma-dangle': ['error', 'always-multiline'],
-    },
+  extends: ['eslint:recommended'],
+  plugins: ['@stylistic'],
+  rules: {
+    'no-console': 'off',
+    'no-undef': 'error',
+    '@stylistic/indent': ['error', 2],
+    '@stylistic/linebreak-style': ['error', 'unix'],
+    '@stylistic/quotes': ['error', 'single'],
+    '@stylistic/semi': ['error', 'never'],
+    '@stylistic/arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
+    '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: false }],
+    '@stylistic/no-trailing-spaces': 'error',
+    '@stylistic/comma-dangle': ['error', 'always-multiline'],
   },
-  {
-    files: ['**/__tests__/**/*.js', '**/*.test.js', '**/*.spec.js'],
-    plugins: {
-      jest: eslintPluginJest,
-    },
-    languageOptions: {
-      globals: {
-        describe: 'readonly',
-        test: 'readonly',
-        expect: 'readonly',
-        beforeAll: 'readonly',
-        afterAll: 'readonly',
-        it: 'readonly',
-      },
-    },
-    rules: {
-      'no-undef': 'off',
-    },
-  },
-])
+  overrides: [
+    {
+      files: ['**/*.test.js', '**/__tests__/**/*.js'],
+      plugins: ['jest'],
+      env: {
+        'jest/globals': true
+      }
+    }
+  ],
+  ignorePatterns: ['node_modules/', 'dist/', 'coverage/', 'coverage/lcov-report/'],
+}
