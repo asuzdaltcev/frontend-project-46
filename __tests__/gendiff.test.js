@@ -7,11 +7,11 @@ import { parseFile } from '../src/parsers.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const getFixturePath = filename => join(__dirname, '..', '__fixtures__', filename)
+const getFixturePath = (filename) => join(__dirname, '..', '__fixtures__', filename)
 
 // Импортируем внутреннюю функцию для тестирования
-const formatDiff = diff => {
-  const lines = diff.map(item => {
+const formatDiff = (diff) => {
+  const lines = diff.map((item) => {
     switch (item.type) {
       case 'unchanged':
         return `    ${item.key}: ${item.value}`
@@ -166,26 +166,26 @@ describe('gendiff', () => {
     expect(Array.isArray(parsedOutput)).toBeTruthy()
 
     // Проверяем некоторые ключевые элементы
-    const commonNode = parsedOutput.find(node => node.key === 'common')
+    const commonNode = parsedOutput.find((node) => node.key === 'common')
     expect(commonNode).toBeDefined()
     expect(commonNode.type).toBe('nested')
     expect(Array.isArray(commonNode.children)).toBeTruthy()
 
     // Проверяем добавленное свойство
-    const followProperty = commonNode.children.find(child => child.key === 'follow')
+    const followProperty = commonNode.children.find((child) => child.key === 'follow')
     expect(followProperty).toBeDefined()
     expect(followProperty.type).toBe('added')
     expect(followProperty.value).toBe(false)
 
     // Проверяем измененное свойство
-    const setting3Property = commonNode.children.find(child => child.key === 'setting3')
+    const setting3Property = commonNode.children.find((child) => child.key === 'setting3')
     expect(setting3Property).toBeDefined()
     expect(setting3Property.type).toBe('changed')
     expect(setting3Property.oldValue).toBe(true)
     expect(setting3Property.newValue).toBeNull()
 
     // Проверяем удаленное свойство
-    const group2Node = parsedOutput.find(node => node.key === 'group2')
+    const group2Node = parsedOutput.find((node) => node.key === 'group2')
     expect(group2Node).toBeDefined()
     expect(group2Node.type).toBe('removed')
   })

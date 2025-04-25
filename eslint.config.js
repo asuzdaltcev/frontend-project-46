@@ -9,17 +9,17 @@ export default {
     sourceType: 'module',
     globals: {
       // Jest globals
-      describe: 'readonly',
-      test: 'readonly',
-      expect: 'readonly',
-      beforeAll: 'readonly',
-      afterAll: 'readonly',
+      describe: true,
+      test: true,
+      expect: true,
+      beforeAll: true,
+      afterAll: true,
       // Node.js globals
-      console: 'readonly',
-      process: 'readonly',
-      module: 'readonly',
-      require: 'readonly',
-      __dirname: 'readonly',
+      console: true,
+      process: true,
+      module: true,
+      require: true,
+      __dirname: true,
     },
   },
   rules: {
@@ -28,6 +28,8 @@ export default {
     '@stylistic/linebreak-style': ['error', 'unix'],
     '@stylistic/quotes': ['error', 'single'],
     '@stylistic/semi': ['error', 'never'],
-    '@stylistic/arrow-parens': ['error', 'as-needed'],
+    '@stylistic/arrow-parens': ['error', 'always'],
+    '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: false }],
+    '@stylistic/no-trailing-spaces': 'error'
   },
 }

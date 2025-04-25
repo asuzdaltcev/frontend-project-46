@@ -3,7 +3,7 @@
  * @param {Array} diff - Массив объектов, представляющих разницу между двумя объектами
  * @returns {string} - Строка в формате JSON
  */
-export const formatDiffJson = diff => {
+export const formatDiffJson = (diff) => {
   try {
     return JSON.stringify(diff, null, 2)
   } catch (error) {

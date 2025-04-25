@@ -2,17 +2,17 @@ import fs from 'fs'
 import path from 'path'
 import yaml from 'js-yaml'
 
-const getAbsolutePath = filepath => (
+const getAbsolutePath = (filepath) => (
   path.isAbsolute(filepath)
     ? filepath
     : path.resolve(process.cwd(), filepath)
 )
 
-const getFixturesPath = filepath => (
+const getFixturesPath = (filepath) => (
   path.resolve(process.cwd(), '__fixtures__', path.basename(filepath))
 )
 
-const getValidPath = filepath => {
+const getValidPath = (filepath) => {
   const initialPath = getAbsolutePath(filepath)
 
   if (fs.existsSync(initialPath)) {
@@ -39,7 +39,7 @@ const parseContent = (content, extension) => {
   throw new Error(`Неподдерживаемый формат файла: ${extension}`)
 }
 
-export const parseFile = filepath => {
+export const parseFile = (filepath) => {
   const validPath = getValidPath(filepath)
   const content = fs.readFileSync(validPath, 'utf-8')
   const extension = path.extname(filepath).toLowerCase()

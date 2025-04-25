@@ -37,7 +37,7 @@ const formatNode = (node, formatNestedFn, depth = 1) => {
   const indentForKey = getIndent(depth)
   const indentForSign = getIndent(depth).slice(0, -2)
   const bracketIndent = getIndent(depth - 1)
-  
+
   const {
     key, type, value, value1, value2, children,
   } = node
@@ -63,8 +63,8 @@ const formatNode = (node, formatNestedFn, depth = 1) => {
 
 const formatStylish = (diff, depth = 1) => {
   const formatFn = (children, newDepth) => formatStylish(children, newDepth)
-  const lines = diff.map(node => formatNode(node, formatFn, depth))
+  const lines = diff.map((node) => formatNode(node, formatFn, depth))
   return lines.join('\n')
 }
 
-export const formatDiffStylishWithComments = diff => `{\n${formatStylish(diff)}\n}`
+export const formatDiffStylishWithComments = (diff) => `{\n${formatStylish(diff)}\n}`

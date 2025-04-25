@@ -25,8 +25,8 @@ const stringify = (value, depth) => {
 const formatDiff = (diff, depth = 1) => {
   const indentForKey = getIndent(depth)
   const indentForSign = getIndent(depth).slice(0, -2)
-  
-  const result = diff.flatMap(node => {
+
+  const result = diff.flatMap((node) => {
     const { type, key, value, oldValue, newValue, children } = node
 
     switch (type) {
@@ -52,6 +52,6 @@ const formatDiff = (diff, depth = 1) => {
   return result.join('\n')
 }
 
-const stylish = diff => `{\n${formatDiff(diff)}\n}`
+const stylish = (diff) => `{\n${formatDiff(diff)}\n}`
 
 export default stylish
