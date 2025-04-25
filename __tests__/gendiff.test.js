@@ -13,16 +13,16 @@ const getFixturePath = (filename) => join(__dirname, '..', '__fixtures__', filen
 const formatDiff = (diff) => {
   const lines = diff.map((item) => {
     switch (item.type) {
-      case 'unchanged':
-        return `    ${item.key}: ${item.value}`;
-      case 'removed':
-        return `  - ${item.key}: ${item.value}`;
-      case 'added':
-        return `  + ${item.key}: ${item.value}`;
-      case 'changed':
-        return `  - ${item.key}: ${item.oldValue}\n  + ${item.key}: ${item.newValue}`;
-      default:
-        return '';
+    case 'unchanged':
+      return `    ${item.key}: ${item.value}`;
+    case 'removed':
+      return `  - ${item.key}: ${item.value}`;
+    case 'added':
+      return `  + ${item.key}: ${item.value}`;
+    case 'changed':
+      return `  - ${item.key}: ${item.oldValue}\n  + ${item.key}: ${item.newValue}`;
+    default:
+      return '';
     }
   });
 

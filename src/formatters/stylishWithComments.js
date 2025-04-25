@@ -5,7 +5,7 @@ const getIndent = (depth, replacer = INDENT_REPLACER) => replacer.repeat(depth *
 
 const formatValue = (value, depth = 0) => {
   if (value === null) return 'null';
-  if (value === '') return "''";
+  if (value === '') return '\'\'';
   if (typeof value === 'object' && value !== null) {
     const indentForKey = getIndent(depth);
     const indentForBracket = getIndent(depth - 1);
@@ -22,14 +22,14 @@ const formatValue = (value, depth = 0) => {
 
 const getComment = (type, isOldValue) => {
   switch (type) {
-    case 'added':
-      return '# Добавлена';
-    case 'removed':
-      return '# Удалена';
-    case 'changed':
-      return isOldValue ? '# Старое значение' : '# Новое значение';
-    default:
-      return '';
+  case 'added':
+    return '# Добавлена';
+  case 'removed':
+    return '# Удалена';
+  case 'changed':
+    return isOldValue ? '# Старое значение' : '# Новое значение';
+  default:
+    return '';
   }
 };
 
@@ -43,21 +43,21 @@ const formatNode = (node, formatNestedFn, depth = 1) => {
   } = node;
 
   switch (type) {
-    case 'nested':
-      return `${indentForKey}${key}: {\n${formatNestedFn(children, depth + 1)}\n${bracketIndent}}`;
-    case 'unchanged':
-      return `${indentForKey}${key}: ${formatValue(value, depth + 1)}`;
-    case 'added':
-      return `${indentForSign}+ ${key}: ${formatValue(value, depth + 1)} ${getComment('added')}`;
-    case 'removed':
-      return `${indentForSign}- ${key}: ${formatValue(value, depth + 1)} ${getComment('removed')}`;
-    case 'changed':
-      return [
-        `${indentForSign}- ${key}: ${formatValue(value1, depth + 1)} ${getComment('changed', true)}`,
-        `${indentForSign}+ ${key}: ${formatValue(value2, depth + 1)} ${getComment('changed', false)}`,
-      ].join('\n');
-    default:
-      return '';
+  case 'nested':
+    return `${indentForKey}${key}: {\n${formatNestedFn(children, depth + 1)}\n${bracketIndent}}`;
+  case 'unchanged':
+    return `${indentForKey}${key}: ${formatValue(value, depth + 1)}`;
+  case 'added':
+    return `${indentForSign}+ ${key}: ${formatValue(value, depth + 1)} ${getComment('added')}`;
+  case 'removed':
+    return `${indentForSign}- ${key}: ${formatValue(value, depth + 1)} ${getComment('removed')}`;
+  case 'changed':
+    return [
+      `${indentForSign}- ${key}: ${formatValue(value1, depth + 1)} ${getComment('changed', true)}`,
+      `${indentForSign}+ ${key}: ${formatValue(value2, depth + 1)} ${getComment('changed', false)}`,
+    ].join('\n');
+  default:
+    return '';
   }
 };
 
