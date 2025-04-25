@@ -21,7 +21,7 @@ export default [
         },
         rules: {
             'no-console': 'off',
-            '@stylistic/indent': ['error', 4],
+            '@stylistic/indent': ['error', 2],
             '@stylistic/linebreak-style': ['error', 'unix'],
             '@stylistic/quotes': ['error', 'single'],
             '@stylistic/semi': ['error', 'never'],
