@@ -1,16 +1,14 @@
+import { defineConfig } from 'eslint-define-config';
 import eslint from '@eslint/js';
 import nodePlugin from 'eslint-plugin-node';
 import importPlugin from 'eslint-plugin-import';
 import stylisticPlugin from '@stylistic/eslint-plugin';
 
-export default [
-  // Глобальные исключения
+export default defineConfig([
   {
     ignores: ['node_modules/**', 'dist/**', 'coverage/**'],
   },
-  // Базовая конфигурация ESLint
   eslint.configs.recommended,
-  // Настройка для JavaScript файлов
   {
     files: ['**/*.js'],
     plugins: {
@@ -45,4 +43,4 @@ export default [
       'stylistic/comma-dangle': ['error', 'always-multiline'],
     },
   },
-]; 
+]); 
