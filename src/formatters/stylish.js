@@ -52,6 +52,6 @@ const formatDiff = (diff, depth = 1) => {
   return result.join('\n')
 }
 
-const stylish = (diff) => `{\n${formatDiff(diff)}\n}`
+const stylish = diff => `{\n${formatDiff(diff)}\n}`
 
 export default stylish

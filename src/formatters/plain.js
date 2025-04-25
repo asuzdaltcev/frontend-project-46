@@ -19,7 +19,7 @@ const formatNode = (node, path = '') => {
 
   switch (type) {
     case 'nested':
-      return children.map((child) => formatNode(child, currentPath)).filter(Boolean).join('\n')
+      return children.map(child => formatNode(child, currentPath)).filter(Boolean).join('\n')
     case 'unchanged':
       return ''
     case 'added':
@@ -34,6 +34,6 @@ const formatNode = (node, path = '') => {
 }
 
 export const formatDiffPlain = (diff) => {
-  const lines = diff.map((node) => formatNode(node)).filter(Boolean)
+  const lines = diff.map(node => formatNode(node)).filter(Boolean)
   return lines.join('\n')
 }

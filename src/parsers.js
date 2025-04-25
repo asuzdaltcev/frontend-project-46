@@ -2,13 +2,13 @@ import fs from 'fs'
 import path from 'path'
 import yaml from 'js-yaml'
 
-const getAbsolutePath = (filepath) => (
+const getAbsolutePath = filepath => (
   path.isAbsolute(filepath)
     ? filepath
     : path.resolve(process.cwd(), filepath)
 )
 
-const getFixturesPath = (filepath) => (
+const getFixturesPath = filepath => (
   path.resolve(process.cwd(), '__fixtures__', path.basename(filepath))
 )
 
